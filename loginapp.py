@@ -17,14 +17,14 @@ Check if the user name is on the database and ask for password.
 def login(uname):
     USACdb = cargar_datos()
     if uname in USACdb:
-        password = input ('Welcome, please introduce password: ')
-        passwordx = hash(password)
+        passwordx = hash(input ('Welcome, please introduce password: '))
         if passwordx == USACdb[uname][0]:
             print ('Welcome to USAC')
         else:
             print ('Password invalid, sorry.')
     else: 
         print('User not valid, please try again')
+        
         
 """
 Create a new entry on the dictionary.
@@ -36,8 +36,7 @@ def newuser():
     date = datetime.date.today()
     date2 = date.strftime("%d/%m/%y")
     newuser = input ('Please ADMIN, please introduce the new user name: ')
-    pwd = input ('Please introduce the password: ')
-    pwd_coded = hash(pwd)
+    pwd_coded = hash(input ('Please introduce the password: '))
     USACdb[newuser] = [pwd_coded, date2]
     guardar_datos(USACdb)
     print('Process finished, new user added')
@@ -68,10 +67,39 @@ def remove_user():
         print ('Unable to find ', reg_del, 'on our database' )
     guardar_datos(USACdb)
 
+def admin_menu():
+	"""
+	Función que limpia la pantalla y muestra nuevamente el menu
+	"""
+	print ("Welcome ADMIN, this is what you can do")
+	print ("\t1 - Add new user")
+	print ("\t2 - Remove user")
     
-print ('Welcome to the Ultra-Secure Advanced Check ')
-usuario = input ('Please introduce user name: ')
-if usuario == 'admin':
-    newuser()
-else:
-    login(usuario)
+	# solicituamos una opción al usuario
+	opcionMenu = input("Introduce the number >> ")
+ 
+	if opcionMenu=="1":
+		print ("")
+		newuser()
+	elif opcionMenu=="2":
+		print ("")
+		remove_user()
+	else:
+		print ("")
+		input("No valid option, thank you!")
+
+def main():
+    print ('Welcome to the Ultra-Secure Advanced Check ')
+    usuario = input ('Please introduce user name: ')
+    if usuario == 'admin':
+        admincode = 'canela'
+        pwd = input ('Please introduce admin the password: ')
+        if pwd == admincode:
+            admin_menu()
+        else: 
+            pass
+    else:
+        login(usuario)
+
+
+main()
