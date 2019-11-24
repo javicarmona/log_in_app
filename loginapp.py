@@ -85,7 +85,7 @@ def check_users():
     print ("Exporting active users in Ultra-Secure Advanced Check ")
     USACdb = cargar_datos()
     for i in USACdb:
-        print ("\t>> ", i)
+        print ("\t>> User: ", i, '       Created date: ',USACdb[i][1])
     print ("")
     input ('Press any key to continue...')
     print ("")
