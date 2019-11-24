@@ -7,7 +7,6 @@ Created on Sun Nov 24 00:51:19 2019
 """
 
 import datetime
-import pandas as pd
 import pickle #pickle is a module to save .dat files
 
 """
@@ -41,6 +40,19 @@ def newuser():
     guardar_datos(USACdb)
     print('Process finished, new user added')
     
+def newuser():
+    USACdb = cargar_datos()
+    date = datetime.date.today()
+    date2 = date.strftime("%d/%m/%y")
+    newuser = input ('Please ADMIN, please introduce the new user name: ')
+    pwd_coded = hash(input ('Please introduce the password: '))
+    USACdb[newuser] = [pwd_coded, date2]
+    guardar_datos(USACdb)
+    print ("")
+    print('Process finished, new user added')
+    input('Press any key to continue')
+
+    
 def guardar_datos(dic):
     with open("USACdb.dat", "wb") as f:
         pickle.dump(dic, f)   
@@ -62,44 +74,80 @@ def remove_user():
     reg_del = input ('Please introduce the user to DELETE: ')
     if reg_del in USACdb:
         del USACdb[reg_del]
+        print('')
         print ('The user ', reg_del, 'was been deleted, have a nice day' )
+        input('Press any key to continue')
     else:
         print ('Unable to find ', reg_del, 'on our database' )
     guardar_datos(USACdb)
 
-def admin_menu():
-	"""
-	Función que limpia la pantalla y muestra nuevamente el menu
-	"""
-	print ("Welcome ADMIN, this is what you can do")
-	print ("\t1 - Add new user")
-	print ("\t2 - Remove user")
+def check_users():
+    print ("Exporting active users in Ultra-Secure Advanced Check ")
+    USACdb = cargar_datos()
+    for i in USACdb:
+        print ("\t>> ", i)
+    print ("")
+    input ('Press any key to continue...')
+    print ("")
+
     
-	# solicituamos una opción al usuario
-	opcionMenu = input("Introduce the number >> ")
+def admin_menu():
+    """
+    Función que limpia la pantalla y muestra nuevamente el menu
+    """
+    print ("")
+    print ("Welcome ADMIN, this is what you can do")
+    print ("\t1 - Add new user")
+    print ("\t2 - Remove user")
+    print ("\t3 - Check active users")
+
+    
+    # solicituamos una opción al usuario
+    opcionMenu = input("Introduce a number >> ")
  
-	if opcionMenu=="1":
-		print ("")
-		newuser()
-	elif opcionMenu=="2":
-		print ("")
-		remove_user()
-	else:
-		print ("")
-		input("No valid option, thank you!")
-
-def main():
-    print ('Welcome to the Ultra-Secure Advanced Check ')
-    usuario = input ('Please introduce user name: ')
-    if usuario == 'admin':
-        admincode = 'canela'
-        pwd = input ('Please introduce admin the password: ')
-        if pwd == admincode:
-            admin_menu()
-        else: 
-            pass
+    if opcionMenu=="1":
+        print ("")
+        newuser()
+    elif opcionMenu=="2":
+        print ("")
+        remove_user()
+    elif opcionMenu=="3":
+        print ("")
+        check_users()
     else:
-        login(usuario)
-
-
+        print ("")
+        input("No valid option, thank you!")
+        print ("")
+        
+def main():
+    while True: 
+        print (" ")
+        print ('Welcome to the Ultra-Secure Advanced Check ')
+        print ('Choose an option: ')
+        print ("\t1 - Log in")
+        print ("\t2 - Exit")
+        opcionMenu = input("Introduce a number >> ")
+        if opcionMenu=="1":
+            print ("")
+            usuario = input ('Please introduce user name: ')
+            if usuario == 'admin':
+                admincode = 'canela'
+                pwd = input ('Please introduce admin the password: ')
+                print ("")
+                if pwd == admincode:
+                    admin_menu()
+                else: 
+                    pass
+            else:
+                login(usuario)
+    
+        elif opcionMenu=="2":
+            print ("")
+            print ('Thank you for use Ultra-Secure Advanced Check, bye bye! ')
+            break
+        else:
+            print ("")
+            input("Option not valid.")
+            
 main()
+    
