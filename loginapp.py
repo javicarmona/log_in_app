@@ -52,6 +52,22 @@ def cargar_datos():
             return pickle.load(f)
     except (OSError, IOError) as e:
         return dict()
+
+def remove_user():
+    USACdb = cargar_datos()
+    print ('List of active users on USAC:')
+    print(USACdb.keys())
+    print ('-----------------------------')
+    for i in USACdb:
+        print (i)
+    reg_del = input ('Please introduce the user to DELETE: ')
+    if reg_del in USACdb:
+        del USACdb[reg_del]
+        print ('The user ', reg_del, 'was been deleted, have a nice day' )
+    else:
+        print ('Unable to find ', reg_del, 'on our database' )
+    guardar_datos(USACdb)
+
     
 print ('Welcome to the Ultra-Secure Advanced Check ')
 usuario = input ('Please introduce user name: ')
