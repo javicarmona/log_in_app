@@ -1,8 +1,7 @@
 i am groot
 
-![](name-of-giphy.gif)
-
-                            
+![](source.gif)
+                 
                             
 log in with user and pass
 Trying to create an app with a database of users and passwords.
