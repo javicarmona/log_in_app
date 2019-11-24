@@ -1,5 +1,5 @@
 ### I am Groot █║▌│█│║▌║││█║▌║▌║
-and this is my app for register and save users database
+and this is my app for register and save users in a file.
 
 ![](source.gif)
                  
@@ -14,6 +14,8 @@ If you user "admin" as username you will access to the admin menu from where you
 
 Download and use it!! 
 
-Admin user and password are "admin" and "canela" ;) 
+To can manage users you must log in as admin with 
 
+User: "admin"
+Pass: "canela"
 
